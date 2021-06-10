@@ -1,7 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { getMoviesByName, getMovieDetailsById } from "./utils/api";
 
 function App() {
+  getMoviesByName("Guardians of the Galaxy Vol. 2");
+  getMovieDetailsById("tt0091541");
+
   return (
     <div className="App">
       <header className="App-header">
