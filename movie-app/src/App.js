@@ -4,7 +4,7 @@ import { getMoviesByName, getMovieDetailsById } from "./utils/api";
 
 function App() {
   getMoviesByName("Guardians of the Galaxy Vol. 2");
-  getMovieDetailsById("tt3896198");
+  getMovieDetailsById("tt0091541");
 
   return (
     <div className="App">
