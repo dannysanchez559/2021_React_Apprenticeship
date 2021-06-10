@@ -3,6 +3,9 @@ import "./App.css";
 import { getMoviesByName, getMovieDetailsById } from "./utils/api";
 
 function App() {
+  getMoviesByName("Guardians of the Galaxy Vol. 2");
+  getMovieDetailsById("tt3896198");
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,9 +22,6 @@ function App() {
           Learn React
         </a>
       </header>
-
-      {getMoviesByName("Guardians of the Galaxy Vol. 2")}
-      {getMovieDetailsById("tt3896198")}
     </div>
   );
 }
