@@ -20,8 +20,8 @@ function App() {
       >
         {({ movie, getMovieDetailsById, getMoviesByName }) => (
             <div>
-              <button type="button" onClick={() => getMovieDetailsById(searchTerm)}>getMovieDetailsById</button>
-              <button type="button" onClick={() => getMoviesByName(searchTerm)}>getMoviesByName</button>
+              <button type="button" onClick={() => getMovieDetailsById()}>getMovieDetailsById</button>
+              <button type="button" onClick={() => getMoviesByName()}>getMoviesByName</button>
               <p>---------------------------------------------------------------------------------</p>
               {movie &&
                 <div>
