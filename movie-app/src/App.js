@@ -1,27 +1,38 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { getMoviesByName, getMovieDetailsById } from "./utils/api";
+import { useState } from 'react';
+import { Api } from './utils/api';
 
 function App() {
-  getMoviesByName("Guardians of the Galaxy Vol. 2");
-  getMovieDetailsById("tt0091541");
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    event.preventDefault();
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <label>Search</label>
+      <input type="text" value={searchTerm} name="search" onChange={handleChange} />
+      <Api
+        searchTerm={searchTerm}
+      >
+        {({ movie, getMovieDetailsById, getMoviesByName }) => (
+            <div>
+              <button type="button" onClick={() => getMovieDetailsById(searchTerm)}>getMovieDetailsById</button>
+              <button type="button" onClick={() => getMoviesByName(searchTerm)}>getMoviesByName</button>
+              <p>---------------------------------------------------------------------------------</p>
+              {movie &&
+                <div>
+                  <p>{movie.Title}</p>
+                  <p>{movie.Plot}</p>
+                  <p>{movie.Actors}</p>
+                </div>
+              }
+            </div>
+        )}
+      </Api>
     </div>
   );
 }
