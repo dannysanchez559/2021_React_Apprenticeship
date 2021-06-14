@@ -14,7 +14,6 @@ class App extends React.Component {
   async componentDidMount () {
     try {
       const movie = await getMoviesByName('Batman');
-      console.log(movie);
       this.setState({
         movieTest: movie,
       });
