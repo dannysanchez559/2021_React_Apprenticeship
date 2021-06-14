@@ -1,29 +1,47 @@
-import logo from "./logo.svg";
+import React from 'react';
 import "./App.css";
-import { getMoviesByName, getMovieDetailsById } from "./utils/api";
+import { getMoviesByName } from "./utils/api";
+import MovieCard from "./components/MovieCard";
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-function App() {
-  getMoviesByName("Guardians of the Galaxy Vol. 2");
-  getMovieDetailsById("tt0091541");
+    this.state = {
+      movieTest: {},
+    }
+  }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  async componentDidMount () {
+    try {
+      const movie = await getMoviesByName('Batman');
+      this.setState({
+        movieTest: movie,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    }
+
+
+  render() {
+
+    return (
+      <div className="App">
+          
+        {this.state.movieTest &&
+          <MovieCard 
+            title={this.state.movieTest?.Title} 
+            posterUrl={this.state.movieTest?.Poster}
+            type={this.state.movieTest?.Type}
+        />
+        }
+      </div>
+    );
+
+
+  }
+  
 }
 
 export default App;
