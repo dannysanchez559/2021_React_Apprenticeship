@@ -7,7 +7,7 @@ const MovieCard = (props) => {
         <div className='moviecard'>
             <img 
                 src={props.posterUrl} 
-                alt={`${props.title} poster image`} 
+                alt={`${props.title} poster`} 
             />
 
             <h3 className='moviecard__title'>{props.title}</h3>
