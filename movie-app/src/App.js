@@ -2,6 +2,8 @@ import React from 'react';
 import "./App.css";
 import { getMoviesByName } from "./utils/api";
 import MovieCard from "./components/MovieCard";
+import MovieDetails from './components/MovieDetails';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,11 +32,25 @@ class App extends React.Component {
       <div className="App">
           
         {this.state.movieTest &&
+        <>
           <MovieCard 
             title={this.state.movieTest?.Title} 
             posterUrl={this.state.movieTest?.Poster}
             type={this.state.movieTest?.Type}
         />
+
+        <MovieDetails 
+          posterUrl={this.state.movieTest?.Poster}
+          title={this.state.movieTest?.Title}
+          rated={this.state.movieTest?.Rated}
+          runtime={this.state.movieTest?.Runtime}
+          genre={this.state.movieTest?.Genre}
+          plot={this.state.movieTest?.Plot}
+          actors={this.state.movieTest?.Actors}
+          rating={this.state.movieTest?.imdbRating}
+        />
+
+          </>
         }
       </div>
     );
