@@ -1,63 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { getMoviesByName } from "./utils/api";
 import MovieCard from "./components/MovieCard";
-import MovieDetails from './components/MovieDetails';
+import MovieDetails from "./components/MovieDetails";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [movie, setMovie] = useState({});
 
-    this.state = {
-      movieTest: {},
-    }
-  }
-
-  async componentDidMount () {
+  const getMoviesByNameAPI = async (name) => {
     try {
-      const movie = await getMoviesByName('Batman');
-      this.setState({
-        movieTest: movie,
-      });
+      const moviesAPI = await getMoviesByName(name);
+      setMovie(moviesAPI);
     } catch (error) {
       console.error(error);
     }
+  };
 
-    }
+  useEffect(() => {
+    getMoviesByNameAPI("Batman");
+  }, []);
 
+  // async componentDidMount () {
+  //   try {
+  //     const movie = await getMoviesByName('Batman');
+  //     this.setState({
+  //       movieTest: movie,
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
 
-  render() {
+  //   }
 
-    return (
-      <div className="App">
-          
-        {this.state.movieTest &&
+  console.log(movie);
+
+  return (
+    <div className="App">
+      {movie && (
         <>
-          <MovieCard 
-            title={this.state.movieTest?.Title} 
-            posterUrl={this.state.movieTest?.Poster}
-            type={this.state.movieTest?.Type}
-        />
+          <MovieCard
+            title={movie?.Title}
+            posterUrl={movie?.Poster}
+            type={movie?.Type}
+          />
 
-        <MovieDetails 
-          posterUrl={this.state.movieTest?.Poster}
-          title={this.state.movieTest?.Title}
-          rated={this.state.movieTest?.Rated}
-          runtime={this.state.movieTest?.Runtime}
-          genre={this.state.movieTest?.Genre}
-          plot={this.state.movieTest?.Plot}
-          actors={this.state.movieTest?.Actors}
-          rating={this.state.movieTest?.imdbRating}
-        />
-
-          </>
-        }
-      </div>
-    );
-
-
-  }
-  
-}
+          <MovieDetails
+            posterUrl={movie?.Poster}
+            title={movie?.Title}
+            rated={movie?.Rated}
+            runtime={movie?.Runtime}
+            genre={movie?.Genre}
+            plot={movie?.Plot}
+            actors={movie?.Actors}
+            rating={movie?.imdbRating}
+          />
+        </>
+      )}
+    </div>
+  );
+};
 
 export default App;
