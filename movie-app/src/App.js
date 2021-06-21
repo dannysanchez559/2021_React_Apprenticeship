@@ -20,20 +20,6 @@ const App = () => {
     getMoviesByNameAPI("Batman");
   }, []);
 
-  // async componentDidMount () {
-  //   try {
-  //     const movie = await getMoviesByName('Batman');
-  //     this.setState({
-  //       movieTest: movie,
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-
-  //   }
-
-  console.log(movie);
-
   return (
     <div className="App">
       {movie && (
