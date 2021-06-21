@@ -3,6 +3,7 @@ import "./App.css";
 import { getMoviesByName } from "./utils/api";
 import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
+import Header from "./components/Header";
 
 const App = () => {
   const [movie, setMovie] = useState({});
@@ -24,6 +25,8 @@ const App = () => {
     <div className="App">
       {movie && (
         <>
+          <Header />
+
           <MovieCard
             title={movie?.Title}
             posterUrl={movie?.Poster}
