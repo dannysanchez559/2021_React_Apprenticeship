@@ -39,6 +39,19 @@ export const getTopNetflixMovies = async (...movieIds) => {
       })
     );
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
+
+// -- get movie search results 
+export const getMovieSearchResults = async (movieName) => {
+  try {
+    const url = `${process.env.REACT_APP_OMDB_API_URL}/?s=${movieName}&apikey=${process.env.REACT_APP_OMDB_API_KEY}`;
+
+    return await fetch(url)
+      .then((response) => response.json())
+      .then((data) => data);
+  } catch (error) {
+    console.error(error);
+  }
+}

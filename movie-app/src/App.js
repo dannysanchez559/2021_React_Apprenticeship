@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { getTopNetflixMovies } from "./utils/api";
+import { getTopNetflixMovies, getMovieSearchResults } from "./utils/api";
 import Header from "./components/Header";
 import Carousel from "./components/Carousel";
+import MovieList from "./components/MovieList";
 
 const App = () => {
   const [netflixMovies, setNetflixMovies] = useState([]);
+  const [movieList, setMovieList] = useState([]);
+
+  const getMovieSearchResultsApi = async (name) => {
+    try {
+      const movieNameData = await getMovieSearchResults(name);
+
+      if (movieNameData.Response === 'False') {
+        window.alert(`${movieNameData.Error}, please try a more specific search term.`);
+        throw new Error(movieNameData.Error);
+      }
+
+      if (movieNameData.Response === 'True') {
+        setMovieList(movieNameData.Search);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const getTopNetflixMoviesAPI = async (movieLists) => {
     try {
@@ -34,12 +53,16 @@ const App = () => {
 
   return (
     <div className="App">
-      {netflixMovies.length > 0 && (
-        <>
-          <Header />
-          <Carousel movieList={netflixMovies} />
-        </>
-      )}
+      <Header getMovieSearchResultsApi={getMovieSearchResultsApi} />
+
+      {netflixMovies?.length > 0 && 
+        <Carousel movieList={netflixMovies} />
+      }
+
+      {movieList?.length > 0 && 
+        <MovieList movieList={movieList} />
+      }
+    
     </div>
   );
 };
