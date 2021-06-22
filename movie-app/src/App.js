@@ -1,63 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { getMoviesByName } from "./utils/api";
-import MovieCard from "./components/MovieCard";
-import MovieDetails from './components/MovieDetails';
+import { getTopNetflixMovies } from "./utils/api";
+import Header from "./components/Header";
+import Carousel from "./components/Carousel";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [netflixMovies, setNetflixMovies] = useState([]);
 
-    this.state = {
-      movieTest: {},
-    }
-  }
-
-  async componentDidMount () {
+  const getTopNetflixMoviesAPI = async (movieLists) => {
     try {
-      const movie = await getMoviesByName('Batman');
-      this.setState({
-        movieTest: movie,
-      });
+      const movieListsAPI = await getTopNetflixMovies(...movieLists);
+      setNetflixMovies(movieListsAPI);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
+  };
 
-    }
+  useEffect(() => {
+    const netflixTopMovies = [
+      "tt8421350",
+      "tt5562070",
+      "tt1082109",
+      "tt2531336",
+      "tt6143796",
+      "tt12427840",
+      "tt4052886",
+      "tt0211933",
+      "tt7555294",
+      "tt0362227",
+    ];
+    getTopNetflixMoviesAPI(netflixTopMovies);
+  }, []);
 
-
-  render() {
-
-    return (
-      <div className="App">
-          
-        {this.state.movieTest &&
+  return (
+    <div className="App">
+      {netflixMovies.length > 0 && (
         <>
-          <MovieCard 
-            title={this.state.movieTest?.Title} 
-            posterUrl={this.state.movieTest?.Poster}
-            type={this.state.movieTest?.Type}
-        />
-
-        <MovieDetails 
-          posterUrl={this.state.movieTest?.Poster}
-          title={this.state.movieTest?.Title}
-          rated={this.state.movieTest?.Rated}
-          runtime={this.state.movieTest?.Runtime}
-          genre={this.state.movieTest?.Genre}
-          plot={this.state.movieTest?.Plot}
-          actors={this.state.movieTest?.Actors}
-          rating={this.state.movieTest?.imdbRating}
-        />
-
-          </>
-        }
-      </div>
-    );
-
-
-  }
-  
-}
+          <Header />
+          <Carousel movieList={netflixMovies} />
+        </>
+      )}
+    </div>
+  );
+};
 
 export default App;
