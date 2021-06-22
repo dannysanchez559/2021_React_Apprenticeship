@@ -18,19 +18,7 @@ const Carousel = (props) => {
             posterUrl={movie?.Poster}
             type={movie?.Type}
           />
-
-          // <div key={movie?.imdbID}>
-          //   <img src={movie?.Poster} alt={`${movie?.Title} poster`} />
-          //   <p className="legend">{movie?.Title}</p>
-          // </div>
-
-          // <img
-          //   key={movie?.imdbID}
-          //   src={movie?.Poster}
-          //   alt={`${movie?.Title} poster`}
-          // />
         ))}
-        {/* <button className=''></button> */}
       </Flickity>
     </>
   );

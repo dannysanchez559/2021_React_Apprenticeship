@@ -3,7 +3,6 @@ import React from "react";
 function Header() {
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("onSubmit");
   };
 
   return (
