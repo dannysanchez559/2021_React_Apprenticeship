@@ -1,24 +1,13 @@
 import React, { useState } from "react";
-import { getMoviesByName } from '../utils/api';
 
-function Header() {
+function Header(props) {
   const [movieName, setMovieName] = useState("");
-  const [movieData, setMovieData] = useState({});
-
-  const getMovieByNameApi = async (name) => {
-    try {
-      const movieNameData = await getMoviesByName(name);
-      setMovieData(movieNameData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (movieName.length) {
-      getMovieByNameApi(movieName);
+      props.getMovieSearchResultsApi(movieName);
     } 
     else {
       window.alert("Please enter a search term");
