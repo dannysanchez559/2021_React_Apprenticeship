@@ -14,3 +14,24 @@
 #searchbutton:hover {
   cursor: pointer;
 }
+
+.active, .inactive {
+  font-style: bold;
+  font-size: 1.3em;
+}
+
+.inactive {
+  text-decoration: none;
+  color: lightgray;
+  padding: 2px;
+}
+
+.active {
+  color: purple;
+  padding: 2px;
+}
+
+.active:hover {
+  cursor: pointer;
+  color: rgb(77, 2, 77);
+}

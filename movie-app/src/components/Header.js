@@ -1,32 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Header(props) {
-  const [movieName, setMovieName] = useState("");
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = () => {
 
-    if (movieName.length) {
-      props.getMovieSearchResultsApi(movieName);
+    if (props.movieName.length) {
+      props.getMovieSearchResultsApi(props.movieName);
     } 
     else {
       window.alert("Please enter a search term");
     }
   };
 
-  const onChange = (e) => {
-    const { value } = e.target;
-    setMovieName(value);
-  }
-
   return (
     <div className="header">
       <h1>Movie App Title</h1>
 
-      <form onSubmit={onSubmit}>
-        <input type="text" placeholder="Enter movie name" name="searchbar" value={movieName} onChange={onChange}/>
-        <button id="searchbutton" type="submit"></button>
-      </form>
+        <input type="text" placeholder="Enter movie name" name="searchbar" value={props.movieName} onChange={props.onMovieNameChange}/>
+        <button id="searchbutton" onClick={() => onSubmit()}></button>
+
     </div>
   );
 }

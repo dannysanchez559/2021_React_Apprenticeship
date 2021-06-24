@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieCard from './MovieCard';
 import Header from './Header';
+import PaginationBar from './PaginationBar';
 
 
 const MovieList = (props) => {
