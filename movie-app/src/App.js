@@ -11,7 +11,7 @@ const App = () => {
 
   const getMovieSearchResultsApi = async (name) => {
     try {
-      const movieNameData = await getMovieSearchResults(name);
+      const movieNameData = await getMovieSearchResults(name, 2);
 
       if (movieNameData.Response === 'False') {
         window.alert(`${movieNameData.Error}, please try a more specific search term.`);
