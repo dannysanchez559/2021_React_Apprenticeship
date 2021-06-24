@@ -4,14 +4,22 @@ import { getTopNetflixMovies, getMovieSearchResults } from "./utils/api";
 import Header from "./components/Header";
 import Carousel from "./components/Carousel";
 import MovieList from "./components/MovieList";
+import PaginationBar from "./components/PaginationBar";
 
 const App = () => {
   const [netflixMovies, setNetflixMovies] = useState([]);
   const [movieList, setMovieList] = useState([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const [movieName, setMovieName] = useState("");
 
-  const getMovieSearchResultsApi = async (name) => {
+  const onMovieNameChange = (e) => {
+    const { value } = e.target;
+    setMovieName(value);
+  }
+
+  const getMovieSearchResultsApi = async (page) => {
     try {
-      const movieNameData = await getMovieSearchResults(name);
+      const movieNameData = await getMovieSearchResults(movieName, page);
 
       if (movieNameData.Response === 'False') {
         window.alert(`${movieNameData.Error}, please try a more specific search term.`);
@@ -20,6 +28,7 @@ const App = () => {
 
       if (movieNameData.Response === 'True') {
         setMovieList(movieNameData.Search);
+        setTotalResults(movieNameData.totalResults);
       }
     } catch (error) {
       console.error(error);
@@ -53,14 +62,25 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header getMovieSearchResultsApi={getMovieSearchResultsApi} />
+      <Header 
+        getMovieSearchResultsApi={getMovieSearchResultsApi} 
+        onMovieNameChange={onMovieNameChange} 
+        movieName={movieName}
+      />
 
       {netflixMovies?.length > 0 && 
         <Carousel movieList={netflixMovies} />
       }
 
       {movieList?.length > 0 && 
-        <MovieList movieList={movieList} />
+        <div>
+          <MovieList movieList={movieList} />
+          <PaginationBar 
+            totalResults={totalResults} 
+            getNewPage={getMovieSearchResultsApi}
+          />
+          
+        </div>
       }
     
     </div>

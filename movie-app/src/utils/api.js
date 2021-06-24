@@ -44,9 +44,10 @@ export const getTopNetflixMovies = async (...movieIds) => {
 };
 
 // -- get movie search results 
-export const getMovieSearchResults = async (movieName) => {
+export const getMovieSearchResults = async (movieName, pageNumber) => {
   try {
-    const url = `${process.env.REACT_APP_OMDB_API_URL}/?s=${movieName}&apikey=${process.env.REACT_APP_OMDB_API_KEY}`;
+    const page = pageNumber ? pageNumber : 1;
+    const url = `${process.env.REACT_APP_OMDB_API_URL}/?s=${movieName}&apikey=${process.env.REACT_APP_OMDB_API_KEY}&page=${page}`;
 
     return await fetch(url)
       .then((response) => response.json())
@@ -54,4 +55,6 @@ export const getMovieSearchResults = async (movieName) => {
   } catch (error) {
     console.error(error);
   }
-}
+};
+
+
