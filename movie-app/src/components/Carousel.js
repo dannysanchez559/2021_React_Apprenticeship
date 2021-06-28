@@ -11,7 +11,7 @@ const Carousel = (props) => {
     <>
       <h2>Top Movies on Netflix</h2>
       <Flickity options={flickityOptions}>
-        {props.movieList.map((movie) => (
+        {props.movieList.length > 0 && props.movieList.map((movie) => (
           <MovieCard
             key={movie?.imdbID}
             title={movie?.Title}
