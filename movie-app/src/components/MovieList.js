@@ -14,6 +14,7 @@ const MovieList = (props) => {
                         title={movie?.Title}
                         posterUrl={movie?.Poster}
                         type={movie?.Type}
+                        movieId={movie?.imdbID}
                     />
                 </React.Fragment>
             ))
