@@ -17,6 +17,7 @@ const Carousel = (props) => {
             title={movie?.Title}
             posterUrl={movie?.Poster}
             type={movie?.Type}
+            movieId={movie?.imdbID}
           />
         ))}
       </Flickity>

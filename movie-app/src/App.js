@@ -68,7 +68,9 @@ const App = () => {
         movieName={movieName}
       />
 
-    
+      {netflixMovies?.length > 0 && 
+        <Carousel movieList={netflixMovies} />
+      }
 
       {movieList?.length > 0 && 
         <div>
