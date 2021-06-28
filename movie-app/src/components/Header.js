@@ -14,7 +14,7 @@ function Header(props) {
 
   return (
     <div className="header">
-      <h1>Movie App Title</h1>
+      <h1 onClick={() => props.onHomepage()}>Movie App Title</h1>
 
         <input type="text" placeholder="Enter movie name" name="searchbar" value={props.movieName} onChange={props.onMovieNameChange}/>
         <button id="searchbutton" onClick={() => onSubmit()}></button>

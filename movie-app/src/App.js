@@ -11,6 +11,12 @@ const App = () => {
   const [movieList, setMovieList] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   const [movieName, setMovieName] = useState("");
+  const [homepageIsActive, setHomepageIsActive] = useState(true);
+
+  // This is used on the onClick for homepage on header "logo"
+  const toggleHomepage = () => {
+    setHomepageIsActive(true);
+  }
 
   const onMovieNameChange = (e) => {
     const { value } = e.target;
@@ -29,6 +35,8 @@ const App = () => {
       if (movieNameData.Response === 'True') {
         setMovieList(movieNameData.Search);
         setTotalResults(movieNameData.totalResults);
+        // Always set homepageIsActive to false if the user searches
+        setHomepageIsActive(false);
       }
     } catch (error) {
       console.error(error);
@@ -40,7 +48,7 @@ const App = () => {
       const movieListsAPI = await getTopNetflixMovies(...movieLists);
       setNetflixMovies(movieListsAPI);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -66,23 +74,24 @@ const App = () => {
         getMovieSearchResultsApi={getMovieSearchResultsApi} 
         onMovieNameChange={onMovieNameChange} 
         movieName={movieName}
+        onHomepage={toggleHomepage}
       />
 
-      {netflixMovies?.length > 0 && 
-        <Carousel movieList={netflixMovies} />
+      {!homepageIsActive
+        ? null : (<Carousel movieList={netflixMovies} />)
       }
 
-      {movieList?.length > 0 && 
-        <div>
-          <MovieList movieList={movieList} />
-          <PaginationBar 
-            totalResults={totalResults} 
-            getNewPage={getMovieSearchResultsApi}
-          />
-          
-        </div>
-      }
-    
+      {homepageIsActive
+        ? null : (
+          <div>
+            <MovieList movieList={movieList} />
+            <PaginationBar 
+              totalResults={totalResults} 
+              getNewPage={getMovieSearchResultsApi}
+            />
+            
+          </div>
+        )}
     </div>
   );
 };
