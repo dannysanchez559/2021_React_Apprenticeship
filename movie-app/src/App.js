@@ -93,9 +93,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header
-        getMovieSearchResultsApi={getMovieSearchResultsApi}
-        onMovieNameChange={onMovieNameChange}
+      <div className="background-img"></div>
+      <div className="background-overlay"></div>
+      
+      <Header 
+        getMovieSearchResultsApi={getMovieSearchResultsApi} 
+        onMovieNameChange={onMovieNameChange} 
         movieName={movieName}
         onHomepage={toggleHomepage}
         setMovieName={setMovieName}

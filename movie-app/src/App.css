@@ -1,18 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap');
+body, html {
+  height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
 .App {
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.background-img {
+  box-sizing: border-box;
+  z-index: -1;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background: url("./img/pexels-background-image.jpg");
+
+  /* Add the blur effect */
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+
+  /* Full height */
+  height: 100vh;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.background-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  /* Full height */
+  height: 100vh;
+  width: 100%;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.header {
+  border: 2px solid white;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 55px;
+}
+
+.app-title {
+  margin-left: 75px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 45px;
+  -webkit-transition: font-size 0.4s ease-in-out;
+  transition: font-size 0.4s ease-in-out;
+}
+
+.app-title:hover {
+  cursor: pointer;
+  font-size: 47px;
+}
+
+.searchbar-container {
+  margin-right: 75px;
+  height: 44px;
+  width: auto;
+  display: flex;
+}
+
+input[type="text"] {
+  box-sizing: border-box;
+  width: 200px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  height: 44px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.0);
+  font-size: 20px;
   text-align: center;
 }
 
+input[type="text"]:hover {
+  border: 1px solid #895FB5;
+}
+
+input[type="text"]:focus {
+  width: 275px;
+}
+
 #searchbutton {
+  box-sizing: content-box;
   background-image: url("./img/searchbar-Button.svg");
-  width: 62px;
-  height: 46px;
-  background-color: white;
+  width: 60px;
+  height: 44px;
+  margin-left: 5px;
+  background-color: rgba(0, 0, 0, 0.0);
   background-repeat: no-repeat;
   border: none;
 }
 
 #searchbutton:hover {
   cursor: pointer;
+}
+
+.carousel {
+  border: 2px solid red;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 350px;
+  margin: 0 100px 50px 100px;
 }
 
 .active, .inactive {
