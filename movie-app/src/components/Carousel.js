@@ -1,27 +1,32 @@
 import React from "react";
-import Flickity from "react-flickity-component";
 import MovieCard from "./MovieCard";
-
-const flickityOptions = {
-  groupCells: true,
-};
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.scss';
 
 const Carousel = (props) => {
   return (
-    <>
+    <div className="carousel">
       <h2>Top Movies on Netflix</h2>
-      <Flickity options={flickityOptions}>
+      <Swiper 
+        spaceBetween={20}
+        slidesPerView={4}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+        >
         {props.movieList.length > 0 && props.movieList.map((movie) => (
-          <MovieCard
-            key={movie?.imdbID}
-            title={movie?.Title}
-            posterUrl={movie?.Poster}
-            type={movie?.Type}
-            movieId={movie?.imdbID}
-          />
+          
+          <SwiperSlide key={movie?.imdbID} >
+            <MovieCard
+              title={movie?.Title}
+              posterUrl={movie?.Poster}
+              type={movie?.Type}
+              movieId={movie?.imdbID}
+            />
+          </SwiperSlide>
+          
         ))}
-      </Flickity>
-    </>
+      </Swiper>
+    </div>
   );
 };
 

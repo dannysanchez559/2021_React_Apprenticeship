@@ -70,6 +70,9 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className="background-img"></div>
+      <div className="background-overlay"></div>
+      
       <Header 
         getMovieSearchResultsApi={getMovieSearchResultsApi} 
         onMovieNameChange={onMovieNameChange} 
