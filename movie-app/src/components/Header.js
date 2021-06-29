@@ -4,7 +4,7 @@ function Header(props) {
   const checkErrors = (errorObject) => {
     // Checks to see if there are empty objects.
     // If there is, stop the function return false
-    if (Object.keys(props.errors).length !== 0) {
+    if (Object.keys(props.errors).length === 0) {
       return false;
     }
 
