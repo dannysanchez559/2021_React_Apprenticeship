@@ -25,27 +25,29 @@ function Header(props) {
     // If the checkErrors function returns true which means
     // that it passes all validations, then run API.
     if (checkErrors(props.errors)) {
-      props.getMovieSearchResultsApi(props.movieName);
-      props.setMovieName("");
+      // props.getMovieSearchResultsApi ONLY accepts page in its parameter,
+      // and not anything else i.e. the movie name.
+      props.getMovieSearchResultsApi();
+      props.setUiMovieName("");
     }
   };
 
   return (
     <div className="header">
-      <h1 className="app-title" onClick={() => props.onHomepage()}>Reactoads MovieApp</h1>
+      <h1 className="app-title" onClick={() => props.onHomepage()}>
+        Reactoads MovieApp
+      </h1>
 
-        <div className="searchbar-container">
-          <input
-            type="text"
-            placeholder="Enter movie name"
-            name="searchbar"
-            value={props.movieName}
-            onChange={props.onMovieNameChange}
-          />
-          <button id="searchbutton" onClick={() => onSubmit()}></button>
-        </div>
-        
-      
+      <div className="searchbar-container">
+        <input
+          type="text"
+          placeholder="Enter movie name"
+          name="searchbar"
+          value={props.uiMovieName}
+          onChange={props.onMovieNameChange}
+        />
+        <button id="searchbutton" onClick={() => onSubmit()}></button>
+      </div>
 
       {props.errors?.searchbar?.length ? (
         <div>{props.errors.searchbar}</div>

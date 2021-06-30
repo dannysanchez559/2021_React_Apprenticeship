@@ -1,11 +1,6 @@
 import React from "react";
-import { MovieApp } from './components';
+import { MovieApp } from "./components";
 
-const App = () => {
-
-  return (
-    <MovieApp />
-  )
-};
+const App = () => <MovieApp />;
 
 export default App;

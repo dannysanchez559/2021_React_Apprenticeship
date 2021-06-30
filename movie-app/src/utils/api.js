@@ -43,7 +43,7 @@ export const getTopNetflixMovies = async (...movieIds) => {
   }
 };
 
-// -- get movie search results 
+// -- get movie search results
 export const getMovieSearchResults = async (movieName, pageNumber) => {
   try {
     const page = pageNumber ? pageNumber : 1;
@@ -56,5 +56,3 @@ export const getMovieSearchResults = async (movieName, pageNumber) => {
     console.error(error);
   }
 };
-
-
