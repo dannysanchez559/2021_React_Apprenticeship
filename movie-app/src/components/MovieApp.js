@@ -7,7 +7,10 @@ const MovieApp = () => {
   const [netflixMovies, setNetflixMovies] = useState([]);
   const [movieList, setMovieList] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
+  // These states (movieName and setMovieName) would be used to interact the API
   const [movieName, setMovieName] = useState("");
+  // These states (uiMovieName and setUiMovieName) would be used on the UI side
+  const [uiMovieName, setUiMovieName] = useState("");
   const [homepageIsActive, setHomepageIsActive] = useState(true);
   const [errors, setErrors] = useState({});
 
@@ -36,7 +39,10 @@ const MovieApp = () => {
         break;
     }
 
+    // This will update the movie name which interacts the API
     setMovieName(value);
+    // This will update only on the UI side with no affect on the API
+    setUiMovieName(value);
   };
 
   const getMovieSearchResultsApi = async (page) => {
@@ -96,9 +102,9 @@ const MovieApp = () => {
       <Header
         getMovieSearchResultsApi={getMovieSearchResultsApi}
         onMovieNameChange={onMovieNameChange}
-        movieName={movieName}
         onHomepage={toggleHomepage}
-        setMovieName={setMovieName}
+        setUiMovieName={setUiMovieName}
+        uiMovieName={uiMovieName}
         errors={errors}
       />
 
