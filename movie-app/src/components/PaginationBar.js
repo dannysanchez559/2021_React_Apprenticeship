@@ -20,7 +20,7 @@ const PaginationBar = (props) => {
           <span
             role="button"
             aria-label={`page ${index + 1}`}
-            tabindex="-1"
+            tabIndex="-1"
             className="inactive"
             key={index}
           >
@@ -32,7 +32,7 @@ const PaginationBar = (props) => {
           <span
             role="button"
             aria-label={`page ${index + 1}`}
-            tabindex="-1"
+            tabIndex="-1"
             className="active"
             type="click"
             key={index}
