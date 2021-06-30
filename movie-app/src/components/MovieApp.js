@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import { getTopNetflixMovies, getMovieSearchResults } from "../utils/api";
-import {
-    Carousel,
-    Header,
-    MovieList,
-    PaginationBar,
-} from './';
+import { Carousel, Header, MovieList, PaginationBar } from "./";
 
 const MovieApp = () => {
   const [netflixMovies, setNetflixMovies] = useState([]);
@@ -97,10 +92,10 @@ const MovieApp = () => {
     <div className="App">
       <div className="background-img"></div>
       <div className="background-overlay"></div>
-      
-      <Header 
-        getMovieSearchResultsApi={getMovieSearchResultsApi} 
-        onMovieNameChange={onMovieNameChange} 
+
+      <Header
+        getMovieSearchResultsApi={getMovieSearchResultsApi}
+        onMovieNameChange={onMovieNameChange}
         movieName={movieName}
         onHomepage={toggleHomepage}
         setMovieName={setMovieName}
@@ -121,6 +116,5 @@ const MovieApp = () => {
     </div>
   );
 };
-  
+
 export default MovieApp;
-  

@@ -8,12 +8,12 @@ import MovieList from "./MovieList";
 import PaginationBar from "./PaginationBar";
 
 export {
-    Carousel,
-    Header,
-    Modal,
-    MovieApp,
-    MovieCard,
-    MovieDetails,
-    MovieList,
-    PaginationBar
-}
+  Carousel,
+  Header,
+  Modal,
+  MovieApp,
+  MovieCard,
+  MovieDetails,
+  MovieList,
+  PaginationBar,
+};
