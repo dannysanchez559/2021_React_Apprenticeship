@@ -10,6 +10,7 @@ const PaginationBar = (props) => {
 
   const disablePageNumber = (activePageNumber) => {
     setCurrentPageNumber(activePageNumber);
+    props.setLoading(true);
     props.getNewPage(activePageNumber);
   };
 

@@ -20,6 +20,9 @@ const Carousel = (props) => {
         spaceBetween={0}
         slidesPerView={5}
         navigation={true}
+        breakpoints={{
+          "1024": {slidesPerView: 3},
+        }}
         >
         {props.movieList.length > 0 && props.movieList.map((movie) => (
           

@@ -8,7 +8,7 @@ const MovieList = (props) => {
 
             {/* change following line to dynamic movie name */}
             <div className="movieSearchTitleBox">
-            {<h3 className="movieSearchTitle">{"Batman"}</h3>}
+            {<h3 className="movieSearchTitle">{`"${props.movieListSearchTerm}"`}</h3>}
 
             </div>
             {props.movieList.length > 0 && props.movieList.map((movie) => (

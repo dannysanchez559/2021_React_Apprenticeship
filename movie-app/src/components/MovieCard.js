@@ -1,34 +1,42 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
+import { Modal as CustomModal } from "./";
+import Modal from 'react-modal';
 
 const MovieCard = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
+    Modal.setAppElement('#root');
+
+    if (modalIsOpen) {
+        document.querySelector('body').style.overflow = 'hidden';
+        document.querySelector('html').style.overflow = 'hidden';
+    } else {
+        document.querySelector('body').style.overflow = 'scroll';
+        document.querySelector('html').style.overflow = 'scroll';
+    }
 
     return (
+        <>
         <div className='moviecard'>
-            <button className="movieButton" onClick={() => toggleModal()}>
+            <button className="movieButton" onClick={() => setModalIsOpen(true)}>
                 <img 
                     src={props.posterUrl} 
                     alt={`${props.title} poster`} 
                 />
-                
                 <h3>{props.title}</h3>
             </button>
-
             
-            
-            {/* <button onClick={() => toggleModal()}>View</button> */}
-            {isOpen && 
-               ( <Modal 
-                    toggleModal={toggleModal} 
-                    movieId={props.movieId} 
-                />)
-            }
         </div>
+
+        <Modal className="modalWindow" isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} >
+                
+                <CustomModal 
+                    movieId={props.movieId} 
+                    isOpen={modalIsOpen}
+                    setIsOpen={setModalIsOpen}
+                />
+            </Modal>
+        </>
     )
 }
 

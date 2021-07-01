@@ -28,7 +28,9 @@ function Header(props) {
     if (checkErrors(props.errors)) {
       // props.getMovieSearchResultsApi ONLY accepts page in its parameter,
       // and not anything else i.e. the movie name.
+      props.setLoading(true);
       props.getMovieSearchResultsApi();
+      props.setMovieListSearchTerm(props.uiMovieName);
       props.setUiMovieName("");
     }
     

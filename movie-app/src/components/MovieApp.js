@@ -6,6 +6,7 @@ import {
     Header,
     MovieList,
     PaginationBar,
+    Spinner,
 } from './';
 
 const MovieApp = () => {
@@ -19,17 +20,17 @@ const MovieApp = () => {
   const [uiMovieName, setUiMovieName] = useState("");
   const [homepageIsActive, setHomepageIsActive] = useState(true);
   const [errors, setErrors] = useState({});
-  const [searchButtonPressed, setSearchButtonPressed] = useState(false);
+  const [movieListSearchTerm, setMovieListSearchTerm] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // This is used on the onClick for homepage on header "logo"
   const toggleHomepage = () => {
     setHomepageIsActive(true);
+    setLoading(true);
   };
 
   const onMovieNameChange = (e) => {
     const { name, value } = e.target;
-    //update searchbuttonisclicked to false once user starts typing
-    setSearchButtonPressed(false);
 
     switch (name) {
       case "searchbar":
@@ -122,6 +123,8 @@ const MovieApp = () => {
       'tt0071562',
     ]
     getTopStaffPickMoviesAPI(topStaffPickMovies);
+
+    setLoading(true);
   }, []);
 
   return (
@@ -136,6 +139,8 @@ const MovieApp = () => {
         setUiMovieName={setUiMovieName}
         uiMovieName={uiMovieName}
         errors={errors}
+        setMovieListSearchTerm={setMovieListSearchTerm}
+        setLoading={setLoading}
       />
 
       {!homepageIsActive ? null : (
@@ -150,14 +155,17 @@ const MovieApp = () => {
         <div>
           <MovieList 
             movieList={movieList}
-            movieName={movieName}
+            movieListSearchTerm={movieListSearchTerm}
           />
           <PaginationBar
             totalResults={totalResults}
             getNewPage={getMovieSearchResultsApi}
+            setLoading={setLoading}
           />
         </div>
       )}
+
+      {loading && <Spinner loading={loading} setLoading={setLoading} />}
     </div>
   );
 };
