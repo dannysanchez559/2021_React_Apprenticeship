@@ -6,6 +6,7 @@ import MovieCard from "./MovieCard";
 import MovieDetails from "./MovieDetails";
 import MovieList from "./MovieList";
 import PaginationBar from "./PaginationBar";
+import Spinner from "./Spinner";
 
 export {
   Carousel,
@@ -16,4 +17,5 @@ export {
   MovieDetails,
   MovieList,
   PaginationBar,
+  Spinner,
 };

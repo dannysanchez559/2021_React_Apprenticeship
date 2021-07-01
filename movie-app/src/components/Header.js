@@ -1,6 +1,7 @@
 import React from "react";
 
 function Header(props) {
+
   const checkErrors = (errorObject) => {
     // Checks to see if there are empty objects.
     // If there is, stop the function return false
@@ -27,31 +28,38 @@ function Header(props) {
     if (checkErrors(props.errors)) {
       // props.getMovieSearchResultsApi ONLY accepts page in its parameter,
       // and not anything else i.e. the movie name.
+      props.setLoading(true);
       props.getMovieSearchResultsApi();
+      props.setMovieListSearchTerm(props.uiMovieName);
       props.setUiMovieName("");
     }
+    
   };
 
   return (
     <div className="header">
-      <h1 className="app-title" onClick={() => props.onHomepage()}>
-        Reactoads MovieApp
-      </h1>
+      <h1 className="app-title" onClick={() => props.onHomepage()}>Reactoads MovieApp</h1>
+      
+      <div className="right-header-div">
+        <div className="searchbar-container">
+          <input
+            type="text"
+            placeholder="Enter movie name"
+            name="searchbar"
 
-      <div className="searchbar-container">
-        <input
-          type="text"
-          placeholder="Enter movie name"
-          name="searchbar"
-          value={props.uiMovieName}
-          onChange={props.onMovieNameChange}
-        />
-        <button id="searchbutton" onClick={() => onSubmit()}></button>
-      </div>
+            value={props.uiMovieName}
 
-      {props.errors?.searchbar?.length ? (
-        <div>{props.errors.searchbar}</div>
+            onChange={props.onMovieNameChange}
+          />
+          <button id="searchbutton" onClick={() => onSubmit()}></button>
+        </div>
+        
+        {(props.errors?.searchbar?.length) ? (
+        <div className="error-container" >{props.errors.searchbar}</div>
       ) : null}
+
+      </div>
+ 
     </div>
   );
 }

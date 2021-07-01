@@ -25,8 +25,8 @@ export const getMovieDetailsById = async (id) => {
   }
 };
 
-// -- get top netflix movies
-export const getTopNetflixMovies = async (...movieIds) => {
+// -- get top movies array
+export const getTopMovies = async (...movieIds) => {
   try {
     return await Promise.all(
       movieIds.map(async (movieId) => {

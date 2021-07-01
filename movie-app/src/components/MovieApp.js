@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { getTopNetflixMovies, getMovieSearchResults } from "../utils/api";
-import { Carousel, Header, MovieList, PaginationBar } from "./";
+import { getTopMovies, getMovieSearchResults } from "../utils/api";
+import {
+    Carousel,
+    Header,
+    MovieList,
+    PaginationBar,
+    Spinner,
+} from './';
 
 const MovieApp = () => {
   const [netflixMovies, setNetflixMovies] = useState([]);
+  const [staffPickMovies, setStaffPickMovies] = useState([]);
   const [movieList, setMovieList] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   // These states (movieName and setMovieName) would be used to interact the API
@@ -13,10 +20,13 @@ const MovieApp = () => {
   const [uiMovieName, setUiMovieName] = useState("");
   const [homepageIsActive, setHomepageIsActive] = useState(true);
   const [errors, setErrors] = useState({});
+  const [movieListSearchTerm, setMovieListSearchTerm] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // This is used on the onClick for homepage on header "logo"
   const toggleHomepage = () => {
     setHomepageIsActive(true);
+    setLoading(true);
   };
 
   const onMovieNameChange = (e) => {
@@ -71,12 +81,21 @@ const MovieApp = () => {
 
   const getTopNetflixMoviesAPI = async (movieLists) => {
     try {
-      const movieListsAPI = await getTopNetflixMovies(...movieLists);
+      const movieListsAPI = await getTopMovies(...movieLists);
       setNetflixMovies(movieListsAPI);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const getTopStaffPickMoviesAPI = async (movieLists) => {
+    try {
+      const movieListsAPI = await getTopMovies(...movieLists);
+      setStaffPickMovies(movieListsAPI);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     const netflixTopMovies = [
@@ -85,13 +104,27 @@ const MovieApp = () => {
       "tt1082109",
       "tt2531336",
       "tt6143796",
-      "tt12427840",
+      "tt10839422",
       "tt4052886",
       "tt0211933",
       "tt7555294",
       "tt0362227",
     ];
     getTopNetflixMoviesAPI(netflixTopMovies);
+
+    const topStaffPickMovies = [
+      'tt5052448',
+      'tt2911666',
+      'tt0206634',
+      'tt1375666',
+      'tt0468569',
+      'tt0114709',
+      'tt0298130',
+      'tt0071562',
+    ]
+    getTopStaffPickMoviesAPI(topStaffPickMovies);
+
+    setLoading(true);
   }, []);
 
   return (
@@ -106,19 +139,33 @@ const MovieApp = () => {
         setUiMovieName={setUiMovieName}
         uiMovieName={uiMovieName}
         errors={errors}
+        setMovieListSearchTerm={setMovieListSearchTerm}
+        setLoading={setLoading}
       />
 
-      {!homepageIsActive ? null : <Carousel movieList={netflixMovies} />}
+      {!homepageIsActive ? null : (
+        <>
+          <Carousel carouselTitle={"Top Hits on Netflix"} movieList={netflixMovies} />
+
+          <Carousel carouselTitle={"Staff Top Picks"} movieList={staffPickMovies} />
+        </>
+      )}
 
       {homepageIsActive ? null : (
         <div>
-          <MovieList movieList={movieList} />
+          <MovieList 
+            movieList={movieList}
+            movieListSearchTerm={movieListSearchTerm}
+          />
           <PaginationBar
             totalResults={totalResults}
             getNewPage={getMovieSearchResultsApi}
+            setLoading={setLoading}
           />
         </div>
       )}
+
+      {loading && <Spinner loading={loading} setLoading={setLoading} />}
     </div>
   );
 };

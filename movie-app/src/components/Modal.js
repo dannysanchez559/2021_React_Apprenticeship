@@ -22,7 +22,9 @@ const Modal = (props) => {
     <>
       {modalDetails?.Title && (
         <div>
-          <button onClick={() => props.toggleModal()}>close</button>
+            <div className="closeButtonContainer">
+                <button id="closeModalButton" className="closeModalButton" onClick={() => props.setIsOpen(false)}></button>
+            </div>
           <MovieDetails
             posterUrl={modalDetails?.Poster}
             title={modalDetails?.Title}
@@ -32,6 +34,8 @@ const Modal = (props) => {
             genre={modalDetails?.Genre}
             plot={modalDetails?.Plot}
             actors={modalDetails?.Actors}
+            ratingsArray={modalDetails?.Ratings}
+            year={modalDetails?.Year}
           />
         </div>
       )}
