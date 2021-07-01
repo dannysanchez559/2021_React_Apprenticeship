@@ -13,7 +13,10 @@ const MovieApp = () => {
   const [staffPickMovies, setStaffPickMovies] = useState([]);
   const [movieList, setMovieList] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
+  // These states (movieName and setMovieName) would be used to interact the API
   const [movieName, setMovieName] = useState("");
+  // These states (uiMovieName and setUiMovieName) would be used on the UI side
+  const [uiMovieName, setUiMovieName] = useState("");
   const [homepageIsActive, setHomepageIsActive] = useState(true);
   const [errors, setErrors] = useState({});
   const [searchButtonPressed, setSearchButtonPressed] = useState(false);
@@ -45,7 +48,10 @@ const MovieApp = () => {
         break;
     }
 
+    // This will update the movie name which interacts the API
     setMovieName(value);
+    // This will update only on the UI side with no affect on the API
+    setUiMovieName(value);
   };
 
   const getMovieSearchResultsApi = async (page) => {
@@ -122,15 +128,13 @@ const MovieApp = () => {
     <div className="App">
       <div className="background-img"></div>
       <div className="background-overlay"></div>
-      
-      <Header 
-        getMovieSearchResultsApi={getMovieSearchResultsApi} 
-        onMovieNameChange={onMovieNameChange} 
-        searchButtonPressed={searchButtonPressed}
-        setSearchButtonPressed={setSearchButtonPressed}
-        movieName={movieName}
+
+      <Header
+        getMovieSearchResultsApi={getMovieSearchResultsApi}
+        onMovieNameChange={onMovieNameChange}
         onHomepage={toggleHomepage}
-        setMovieName={setMovieName}
+        setUiMovieName={setUiMovieName}
+        uiMovieName={uiMovieName}
         errors={errors}
       />
 
@@ -157,6 +161,5 @@ const MovieApp = () => {
     </div>
   );
 };
-  
+
 export default MovieApp;
-  

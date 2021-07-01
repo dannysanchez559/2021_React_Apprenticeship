@@ -26,9 +26,10 @@ function Header(props) {
     // If the checkErrors function returns true which means
     // that it passes all validations, then run API.
     if (checkErrors(props.errors)) {
-      props.getMovieSearchResultsApi(props.movieName);
-      props.setMovieName("");
-      // const runFunc = () => props.setSearchButtonPressed(true);
+      // props.getMovieSearchResultsApi ONLY accepts page in its parameter,
+      // and not anything else i.e. the movie name.
+      props.getMovieSearchResultsApi();
+      props.setUiMovieName("");
     }
     
   };
@@ -43,14 +44,13 @@ function Header(props) {
             type="text"
             placeholder="Enter movie name"
             name="searchbar"
-            value={props.movieName}
+
+            value={props.uiMovieName}
+
             onChange={props.onMovieNameChange}
           />
           <button id="searchbutton" onClick={() => onSubmit()}></button>
         </div>
-
-        {/* props.searchButtonWasClicked */}
-        {console.log(`searchbutton: ${props.searchButtonPressed}`)}
         
         {(props.errors?.searchbar?.length) ? (
         <div className="error-container" >{props.errors.searchbar}</div>
