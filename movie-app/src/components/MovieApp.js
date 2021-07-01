@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { getTopNetflixMovies, getMovieSearchResults } from "../utils/api";
+import { getTopMovies, getMovieSearchResults } from "../utils/api";
 import {
     Carousel,
     Header,
@@ -10,11 +10,13 @@ import {
 
 const MovieApp = () => {
   const [netflixMovies, setNetflixMovies] = useState([]);
+  const [staffPickMovies, setStaffPickMovies] = useState([]);
   const [movieList, setMovieList] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   const [movieName, setMovieName] = useState("");
   const [homepageIsActive, setHomepageIsActive] = useState(true);
   const [errors, setErrors] = useState({});
+  const [searchButtonPressed, setSearchButtonPressed] = useState(false);
 
   // This is used on the onClick for homepage on header "logo"
   const toggleHomepage = () => {
@@ -23,6 +25,8 @@ const MovieApp = () => {
 
   const onMovieNameChange = (e) => {
     const { name, value } = e.target;
+    //update searchbuttonisclicked to false once user starts typing
+    setSearchButtonPressed(false);
 
     switch (name) {
       case "searchbar":
@@ -70,12 +74,21 @@ const MovieApp = () => {
 
   const getTopNetflixMoviesAPI = async (movieLists) => {
     try {
-      const movieListsAPI = await getTopNetflixMovies(...movieLists);
+      const movieListsAPI = await getTopMovies(...movieLists);
       setNetflixMovies(movieListsAPI);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const getTopStaffPickMoviesAPI = async (movieLists) => {
+    try {
+      const movieListsAPI = await getTopMovies(...movieLists);
+      setStaffPickMovies(movieListsAPI);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     const netflixTopMovies = [
@@ -84,13 +97,25 @@ const MovieApp = () => {
       "tt1082109",
       "tt2531336",
       "tt6143796",
-      "tt12427840",
+      "tt10839422",
       "tt4052886",
       "tt0211933",
       "tt7555294",
       "tt0362227",
     ];
     getTopNetflixMoviesAPI(netflixTopMovies);
+
+    const topStaffPickMovies = [
+      'tt5052448',
+      'tt2911666',
+      'tt0206634',
+      'tt1375666',
+      'tt0468569',
+      'tt0114709',
+      'tt0298130',
+      'tt0071562',
+    ]
+    getTopStaffPickMoviesAPI(topStaffPickMovies);
   }, []);
 
   return (
@@ -101,17 +126,28 @@ const MovieApp = () => {
       <Header 
         getMovieSearchResultsApi={getMovieSearchResultsApi} 
         onMovieNameChange={onMovieNameChange} 
+        searchButtonPressed={searchButtonPressed}
+        setSearchButtonPressed={setSearchButtonPressed}
         movieName={movieName}
         onHomepage={toggleHomepage}
         setMovieName={setMovieName}
         errors={errors}
       />
 
-      {!homepageIsActive ? null : <Carousel movieList={netflixMovies} />}
+      {!homepageIsActive ? null : (
+        <>
+          <Carousel carouselTitle={"Top Hits on Netflix"} movieList={netflixMovies} />
+
+          <Carousel carouselTitle={"Staff Top Picks"} movieList={staffPickMovies} />
+        </>
+      )}
 
       {homepageIsActive ? null : (
         <div>
-          <MovieList movieList={movieList} />
+          <MovieList 
+            movieList={movieList}
+            movieName={movieName}
+          />
           <PaginationBar
             totalResults={totalResults}
             getNewPage={getMovieSearchResultsApi}

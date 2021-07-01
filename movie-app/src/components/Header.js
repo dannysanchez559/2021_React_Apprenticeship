@@ -1,6 +1,7 @@
 import React from "react";
 
 function Header(props) {
+
   const checkErrors = (errorObject) => {
     // Checks to see if there are empty objects.
     // If there is, stop the function return false
@@ -27,13 +28,16 @@ function Header(props) {
     if (checkErrors(props.errors)) {
       props.getMovieSearchResultsApi(props.movieName);
       props.setMovieName("");
+      // const runFunc = () => props.setSearchButtonPressed(true);
     }
+    
   };
 
   return (
     <div className="header">
       <h1 className="app-title" onClick={() => props.onHomepage()}>Reactoads MovieApp</h1>
-
+      
+      <div className="right-header-div">
         <div className="searchbar-container">
           <input
             type="text"
@@ -44,12 +48,16 @@ function Header(props) {
           />
           <button id="searchbutton" onClick={() => onSubmit()}></button>
         </div>
-        
-      
 
-      {props.errors?.searchbar?.length ? (
-        <div>{props.errors.searchbar}</div>
+        {/* props.searchButtonWasClicked */}
+        {console.log(`searchbutton: ${props.searchButtonPressed}`)}
+        
+        {(props.errors?.searchbar?.length) ? (
+        <div className="error-container" >{props.errors.searchbar}</div>
       ) : null}
+
+      </div>
+ 
     </div>
   );
 }

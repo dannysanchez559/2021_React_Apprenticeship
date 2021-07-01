@@ -10,15 +10,18 @@ const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className='moviecard'>
-            <img 
-                src={props.posterUrl} 
-                alt={`${props.title} poster`} 
-            />
+            <button className="movieButton" onClick={() => toggleModal()}>
+                <img 
+                    src={props.posterUrl} 
+                    alt={`${props.title} poster`} 
+                />
+                
+                <h3>{props.title}</h3>
+            </button>
 
-            <h3 className='moviecard__title'>{props.title}</h3>
-
-            <span className='movie__type'>{props.type}</span>
-            <button onClick={() => toggleModal()}>View</button>
+            
+            
+            {/* <button onClick={() => toggleModal()}>View</button> */}
             {isOpen && 
                ( <Modal 
                     toggleModal={toggleModal} 
