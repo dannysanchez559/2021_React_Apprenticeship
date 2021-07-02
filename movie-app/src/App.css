@@ -5,6 +5,10 @@ body, html {
   font-family: 'Roboto', sans-serif;
 }
 
+*:focus {
+  outline: none;
+}
+
 .App {
   text-align: center;
   color: white;
@@ -15,6 +19,7 @@ body, html {
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: hidden;
 }
 
 .background-img {
@@ -30,7 +35,9 @@ body, html {
   -webkit-filter: blur(12px);
 
   /* Full height */
-  min-height: 110%;
+  min-height: 150vh;
+  height: 100%;
+  max-height: 110%;
   width: 100%;
 
   /* Center and scale the image nicely */
@@ -44,7 +51,9 @@ body, html {
   left: 0px;
   top: 0px;
   /* Full height */
-  min-height: 110%;
+  min-height: 150vh;
+  height: 100%;
+  max-height: 110%;
   width: 100%;
   z-index: -1;
   background: rgba(0, 0, 0, 0.75);
@@ -86,7 +95,6 @@ body, html {
   width: auto;
   display: flex;
   flex-direction: row;
-  /* border: 2px solid red; */
   margin: 35px auto 0 auto;
 }
 
@@ -159,8 +167,6 @@ input[type="text"]:focus {
   transition: all 0.4s ease-in-out;
   padding: 8px 15px;
   border-radius: 50%;
-  /* width=32
-     height=52 */
 }
 
 .swiper-button-next:hover,
@@ -252,13 +258,12 @@ nav ul li {
   margin: 5px 3px;
 }
 
-.active, .inactive {
+a.active, a.inactive {
   font-style: bold;
   font-size: 1.3em;
 }
 
 .inactive {
-  text-decoration: none;
   color: #CFA9F9;
   padding: 2px;
 }
@@ -278,16 +283,11 @@ nav ul li {
   background: rgba(0, 0, 0, 0.60) !important;
 }
 
-.ReactModal__Overlay--after-open {
-
-}
-
 .modalWindow {
   z-index: 100;
   box-sizing: border-box;
   width: 750px;
-  height: 500px;
-  margin: 7% auto;
+  height: 550px;
   border: 2px solid rgba(208, 169, 249, 0.5);
   border-radius: 10px;
   color: white;
@@ -296,6 +296,10 @@ nav ul li {
   flex-wrap: nowrap;
   padding: 25px;
   background: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .closeButtonContainer {
@@ -369,11 +373,11 @@ nav ul li {
 }
 
 .modal-right {
-  width: 340px;
+  width: 350px;
   height: 410px;
   display: flex;
   flex-direction: column;
-  margin-right: 30px;
+  margin-right: 10px;
   padding: 0 10px 10px 10px;
 }
 
@@ -381,7 +385,6 @@ nav ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
 }
 
 .titleDiv * {
@@ -389,20 +392,19 @@ nav ul li {
 }
 
 .titleDiv span {
-  margin-right: 30px;
+  margin-right: 25px;
   font-size: 26px;
   color: #CFA9F9;
   font-weight: 800;
 }
 
 .modal-right h2 {
-  font-size: 33px;
+  font-size: 30px;
   font-weight: 800;
 }
 
 .movieInfo {
   margin-top: 10px;
-  padding: 5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -428,7 +430,7 @@ nav ul li {
 
 .modal-right-bottom {
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .modal-right-bottom h3 {
@@ -439,7 +441,135 @@ nav ul li {
 .modal-right-bottom p {
   margin-left: 10px;
   margin-bottom: 30px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
 }
 
+
+
+/***** RESPONSIVE DESIGN *****/
+
+@media screen and (max-width: 1024px) {
+  .movielist {
+    flex-wrap: wrap;
+    margin: 0 75px;
+    justify-content: center;
+}
+
+.background-img {
+  min-height: 102%;
+}
+
+.background-overlay {
+  min-height: 102%;
+}
+
+nav ul {
+  padding: 0;
+}
+
+nav ul li a {
+  margin: 5px;
+}
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .app-title {
+    font-size: 40px;
+  }
+
+  input[type="text"] {
+    width: 175px;
+  }
+
+  input[type="text"]:focus {
+    width: 225px;
+  }
+
+  .ReactModal__Content {
+    width: 700px;
+  }
+
+}
+
+@media screen and (max-width: 414px) {
+
+  .App {
+
+  }
+
+  .header {
+    flex-direction: column;
+    height: 250px;
+  }
+
+  .app-title {
+    margin: 50px auto 0 auto;
+  }
+
+  .right-header-div {
+    margin: 0 auto;
+  }
+
+  .searchbar-container {
+    margin-top: 10px;
+  }
+
+  .error-container {
+    margin: 10px auto;
+  }
+
+  .carousel {
+    box-sizing: border-box;
+    margin: 0 25px 50px 25px;
+    padding: 10px auto;
+}
+
+  .movielist {
+    margin: 0 25px;
+  }
+
+  .modalWindow {
+    width: 350px;
+    padding: 10px;
+    overflow: hidden;
+    height: auto;
+  }
+
+  .movieDetails {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-right {
+    height: auto;
+    width: auto;
+    margin: 10px auto;
+  }
+
+  .titleDiv {
+    margin-bottom: 10px;
+  }
+
+  .modal-left {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .modal-left img {
+    display: none;
+  }
+
+}
+@media screen and (max-width: 375px) {
+
+  .swiper-wrapper {
+    margin: 0 10px !important;
+  }
+}

@@ -16,6 +16,7 @@ const Modal = (props) => {
 
   useEffect(() => {
     getMovieDetailsByIdAPI();
+    props.setLoading(true);
   }, []);
 
   return (
@@ -23,7 +24,11 @@ const Modal = (props) => {
       {modalDetails?.Title && (
         <div>
             <div className="closeButtonContainer">
-                <button id="closeModalButton" className="closeModalButton" onClick={() => props.setIsOpen(false)}></button>
+                <button id="closeModalButton" className="closeModalButton" onClick={() => {
+                  document.querySelector('body').style.overflow = 'scroll';
+                  document.querySelector('html').style.overflow = 'scroll';
+                  return props.setIsOpen(false)
+                }}></button>
             </div>
           <MovieDetails
             posterUrl={modalDetails?.Poster}
@@ -36,6 +41,11 @@ const Modal = (props) => {
             actors={modalDetails?.Actors}
             ratingsArray={modalDetails?.Ratings}
             year={modalDetails?.Year}
+            SpinnerComponent={props.SpinnerComponent}
+            loading={props.loading}
+            setLoading={props.setLoading}
+            loadTime={props.loadTime}
+            isOpen={props.isOpen}
           />
         </div>
       )}
