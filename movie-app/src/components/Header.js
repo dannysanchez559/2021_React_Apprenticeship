@@ -1,11 +1,19 @@
-import React from "react";
+import React from 'react';
 
-function Header(props) {
-
+function Header({
+  getMovieSearchResultsApi,
+  onMovieNameChange,
+  onHomepage,
+  setUiMovieName,
+  uiMovieName,
+  errors,
+  setMovieListSearchTerm,
+  setLoading,
+}) {
   const checkErrors = (errorObject) => {
     // Checks to see if there are empty objects.
     // If there is, stop the function return false
-    if (Object.keys(props.errors).length === 0) {
+    if (Object.keys(errors).length === 0) {
       return false;
     }
 
@@ -25,41 +33,39 @@ function Header(props) {
   const onSubmit = () => {
     // If the checkErrors function returns true which means
     // that it passes all validations, then run API.
-    if (checkErrors(props.errors)) {
+    if (checkErrors(errors)) {
       // props.getMovieSearchResultsApi ONLY accepts page in its parameter,
       // and not anything else i.e. the movie name.
-      props.setLoading(true);
-      props.getMovieSearchResultsApi();
-      props.setMovieListSearchTerm(props.uiMovieName);
-      props.setUiMovieName("");
+      const movieNameTrim = uiMovieName.trim();
+      setLoading(true);
+      getMovieSearchResultsApi();
+      setMovieListSearchTerm(movieNameTrim);
+      setUiMovieName('');
     }
-    
   };
 
   return (
     <div className="header">
-      <h1 className="app-title" onClick={() => props.onHomepage()}>Reactoads MovieApp</h1>
-      
+      <h1 className="app-title" onClick={() => onHomepage()}>
+        Reactoads MovieApp
+      </h1>
+
       <div className="right-header-div">
         <div className="searchbar-container">
           <input
             type="text"
             placeholder="Enter movie name"
             name="searchbar"
-
-            value={props.uiMovieName}
-
-            onChange={props.onMovieNameChange}
+            value={uiMovieName}
+            onChange={onMovieNameChange}
           />
-          <button id="searchbutton" onClick={() => onSubmit()} ></button>
+          <button id="searchbutton" onClick={() => onSubmit()}></button>
         </div>
-        
-        {(props.errors?.searchbar?.length) ? (
-        <div className="error-container" >{props.errors.searchbar}</div>
-      ) : null}
 
+        {errors?.searchbar?.length ? (
+          <div className="error-container">{errors.searchbar}</div>
+        ) : null}
       </div>
- 
     </div>
   );
 }

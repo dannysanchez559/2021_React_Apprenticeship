@@ -1,5 +1,5 @@
-import React from "react";
-import { MovieApp } from "./components";
+import React from 'react';
+import { MovieApp } from './components';
 
 const App = () => <MovieApp />;
 

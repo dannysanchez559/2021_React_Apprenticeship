@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from "react";
-import MovieDetails from "./MovieDetails";
-import { getMovieDetailsById } from "../utils/api";
+import React, { useState, useEffect } from 'react';
+import MovieDetails from './MovieDetails';
+import { getMovieDetailsById } from '../utils/api';
 
-const Modal = (props) => {
+const Modal = ({
+  movieId,
+  setIsOpen,
+  SpinnerComponent,
+  loading,
+  setLoading,
+  loadTime,
+}) => {
   const [modalDetails, setModalDetails] = useState({});
 
   const getMovieDetailsByIdAPI = async () => {
     try {
-      const data = await getMovieDetailsById(props.movieId);
+      const data = await getMovieDetailsById(movieId);
       setModalDetails(data);
     } catch (error) {
       console.error(error);
@@ -16,20 +23,24 @@ const Modal = (props) => {
 
   useEffect(() => {
     getMovieDetailsByIdAPI();
-    props.setLoading(true);
+    setLoading(true);
   }, []);
 
   return (
     <>
       {modalDetails?.Title && (
         <div>
-            <div className="closeButtonContainer">
-                <button id="closeModalButton" className="closeModalButton" onClick={() => {
-                  document.querySelector('body').style.overflow = 'scroll';
-                  document.querySelector('html').style.overflow = 'scroll';
-                  return props.setIsOpen(false)
-                }}></button>
-            </div>
+          <div className="closeButtonContainer">
+            <button
+              id="closeModalButton"
+              className="closeModalButton"
+              onClick={() => {
+                document.querySelector('body').style.overflow = 'scroll';
+                document.querySelector('html').style.overflow = 'scroll';
+                return setIsOpen(false);
+              }}
+            ></button>
+          </div>
           <MovieDetails
             posterUrl={modalDetails?.Poster}
             title={modalDetails?.Title}
@@ -41,11 +52,10 @@ const Modal = (props) => {
             actors={modalDetails?.Actors}
             ratingsArray={modalDetails?.Ratings}
             year={modalDetails?.Year}
-            SpinnerComponent={props.SpinnerComponent}
-            loading={props.loading}
-            setLoading={props.setLoading}
-            loadTime={props.loadTime}
-            isOpen={props.isOpen}
+            SpinnerComponent={SpinnerComponent}
+            loading={loading}
+            setLoading={setLoading}
+            loadTime={loadTime}
           />
         </div>
       )}

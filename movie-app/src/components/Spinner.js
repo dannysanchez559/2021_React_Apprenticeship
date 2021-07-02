@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-import PulseLoader from 'react-spinners/PulseLoader'; 
+import PulseLoader from 'react-spinners/PulseLoader';
 
 const override = css`
   display: block;
@@ -8,17 +8,19 @@ const override = css`
   border-color: red;
 `;
 
-const Spinner = (props) => {
+const Spinner = ({ loading, setLoading, loadTime }) => {
   const [color, setColor] = useState('rgba(137, 95, 181, 0.9)');
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      props.setLoading(false);
-    }, props.loadTime);
+      setLoading(false);
+    }, loadTime);
     return () => clearTimeout(timer);
   }, []);
 
-  return (<PulseLoader color={color} loading={props.loading} css={override} size={20} />)
-}
+  return (
+    <PulseLoader color={color} loading={loading} css={override} size={20} />
+  );
+};
 
 export default Spinner;
