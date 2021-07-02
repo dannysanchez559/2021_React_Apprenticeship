@@ -141,31 +141,37 @@ const MovieApp = () => {
         errors={errors}
         setMovieListSearchTerm={setMovieListSearchTerm}
         setLoading={setLoading}
+        loading={loading}
       />
 
       {!homepageIsActive ? null : (
         <>
-          <Carousel carouselTitle={"Top Hits on Netflix"} movieList={netflixMovies} />
+          <Carousel carouselTitle={"Top Hits on Netflix"} movieList={netflixMovies} SpinnerComponent={Spinner} loading={loading} setLoading={setLoading} />
 
-          <Carousel carouselTitle={"Staff Top Picks"} movieList={staffPickMovies} />
+          <Carousel carouselTitle={"Staff Top Picks"} movieList={staffPickMovies} SpinnerComponent={Spinner} loading={loading} setLoading={setLoading} />
         </>
       )}
 
       {homepageIsActive ? null : (
-        <div>
+        <div className='movielist'>
+          <div className="movieSearchTitleBox">
+            <h3 className="movieSearchTitle">{`"${movieListSearchTerm}"`}</h3>
+          </div>
+
           <MovieList 
             movieList={movieList}
-            movieListSearchTerm={movieListSearchTerm}
-          />
-          <PaginationBar
-            totalResults={totalResults}
-            getNewPage={getMovieSearchResultsApi}
+            SpinnerComponent={Spinner}
+            loading={loading}
             setLoading={setLoading}
           />
+          <PaginationBar
+                totalResults={totalResults}
+                getNewPage={getMovieSearchResultsApi}
+                setLoading={setLoading}
+              />
         </div>
       )}
 
-      {loading && <Spinner loading={loading} setLoading={setLoading} />}
     </div>
   );
 };

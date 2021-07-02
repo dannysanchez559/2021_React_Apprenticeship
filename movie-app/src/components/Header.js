@@ -51,7 +51,7 @@ function Header(props) {
 
             onChange={props.onMovieNameChange}
           />
-          <button id="searchbutton" onClick={() => onSubmit()}></button>
+          <button id="searchbutton" onClick={() => onSubmit()} ></button>
         </div>
         
         {(props.errors?.searchbar?.length) ? (

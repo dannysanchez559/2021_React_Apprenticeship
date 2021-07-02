@@ -53,15 +53,12 @@ const PaginationBar = (props) => {
                 {
                     [...new Array(pageNumbers)].map((element, index) => {
                         if (index + 1 === currentPageNumber) {
-                            // return (<span role='button' aria-label={`page ${index+1}`} tabindex="-1" className='inactive' key={index}>{index+1}</span>)
-                            return (<li key={index}>
-                                        <a className='inactive'> {index+1} </a>
+                            return (<li key={index + 1}>
+                                        <a aria-label={`page ${index+1}`} className='inactive'> {index+1} </a>
                                     </li>)
                         } else {
-                            // return (<span role='button' aria-label={`page ${index+1}`} tabindex="-1" className='active' type="click" key={index} onClick={() => disablePageNumber(index + 1)}>{index+1}</span>)
-
-                            return (<li key={index} >
-                                        <a className='active' onClick={() => disablePageNumber(index + 1)}> {index+1} </a>
+                            return (<li key={index + 1} >
+                                        <a aria-label={`page ${index+1}`} className='active' onClick={() => disablePageNumber(index + 1)}> {index+1} </a>
                                     </li>)
                         } 
                     })

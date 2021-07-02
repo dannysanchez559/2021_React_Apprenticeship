@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-import SyncLoader from 'react-spinners/SyncLoader';
+import PulseLoader from 'react-spinners/PulseLoader'; 
 
 const override = css`
   display: block;
@@ -14,11 +14,11 @@ const Spinner = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       props.setLoading(false);
-    }, 2000);
+    }, props.loadTime);
     return () => clearTimeout(timer);
   }, []);
 
-  return (<SyncLoader color={color} loading={props.loading} css={override} size={20} />)
+  return (<PulseLoader color={color} loading={props.loading} css={override} size={20} />)
 }
 
 export default Spinner;
