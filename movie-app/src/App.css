@@ -1,0 +1,575 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap');
+body, html {
+  height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+*:focus {
+  outline: none;
+}
+
+.App {
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.background-img {
+  box-sizing: border-box;
+  z-index: -1;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background: url("./img/pexels-background-image.jpg");
+
+  /* Add the blur effect */
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+
+  /* Full height */
+  min-height: 150vh;
+  height: 100%;
+  max-height: 110%;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+.background-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  /* Full height */
+  min-height: 150vh;
+  height: 100%;
+  max-height: 110%;
+  width: 100%;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.header {
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 55px;
+}
+
+.app-title {
+  margin-left: 75px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 45px;
+  -webkit-transition: font-size 0.4s ease-in-out;
+  transition: font-size 0.4s ease-in-out;
+}
+
+.app-title:hover {
+  cursor: pointer;
+  font-size: 47px;
+}
+
+.right-header-div {
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  margin-right: 75px;
+  flex-wrap: wrap;
+}
+
+.searchbar-container {
+  margin-right: 75px;
+  height: 45px;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  margin: 35px auto 0 auto;
+}
+
+.error-container {
+  width: auto;
+  margin-right: 75px;
+  height: 20px;
+  color: red;
+  margin-top: 10px;
+}
+
+input[type="text"] {
+  box-sizing: border-box;
+  width: 200px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  height: 44px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.0);
+  font-size: 20px;
+  text-align: center;
+}
+
+input[type="text"]:hover {
+  border: 1px solid #895FB5;
+}
+
+input[type="text"]:focus {
+  width: 275px;
+}
+
+#searchbutton {
+  box-sizing: content-box;
+  background-image: url("./img/searchbar-Button.svg");
+  width: 60px;
+  height: 44px;
+  margin-left: 5px;
+  background-color: rgba(0, 0, 0, 0.0);
+  background-repeat: no-repeat;
+  border: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+#searchbutton:hover {
+  cursor: pointer;
+  transform: scale(1.1, 1.1);
+}
+
+.carousel {
+  box-sizing: border-box;
+  margin: 0 100px 50px 100px;
+  padding: 10px auto;
+}
+
+.carousel h2 {
+  text-align: left;
+  
+}
+
+.swiper-wrapper {
+  margin: 0 25px !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #895FB5!important;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  padding: 8px 15px;
+  border-radius: 50%;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.2, 1.2);
+  background-color: rgba(97, 97, 114, 0.397);
+} 
+
+.movielist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 150px;
+  justify-content: center;
+}
+
+.movieSearchTitleBox {
+  flex-basis: 100%;
+  text-align: left;
+}
+
+.movieSearchTitle {
+  color: white;
+  font-size: 25px;
+}
+
+.moviecard {
+  box-sizing: border-box;
+  width: 250px;
+  height: 330px;
+  overflow: hidden;
+  margin: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding: 12px;
+}
+
+.moviecard * {
+  padding: 0;
+  margin: 0;
+}
+
+.moviecard img {
+  display: block;
+  object-fit: cover;
+  width: 200px;
+  height: 250px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.moviecard button {
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.moviecard h3 {
+  margin-top: 12px;
+  font-size: 18px;
+  color: white;
+}
+
+.moviecard button:hover {
+  cursor: pointer;
+  transform: scale(1.05, 1.05);
+}
+
+.movieButton {
+  background: rgba(0, 0, 0, 0.0);
+  border: none;
+}
+
+/* for movielist pagination */
+nav ul {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  width: auto;
+  margin: 30px 75px;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+nav ul li {
+  list-style-type: none;
+  margin: 5px 3px;
+}
+
+a.active, a.inactive {
+  font-style: bold;
+  font-size: 1.3em;
+}
+
+.inactive {
+  color: #CFA9F9;
+  padding: 2px;
+}
+
+.active {
+  color: purple;
+  padding: 2px;
+}
+
+.active:hover {
+  cursor: pointer;
+  color: rgb(77, 2, 77);
+}
+
+.ReactModal__Overlay {
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.60) !important;
+}
+
+.modalWindow {
+  z-index: 100;
+  box-sizing: border-box;
+  width: 750px;
+  height: 550px;
+  border: 2px solid rgba(208, 169, 249, 0.5);
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.closeButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  height: auto;
+}
+
+#closeModalButton {
+  background-image: url("./img/closeModalButton.svg");
+  background-color: rgba(0, 0, 0, 0.0);
+  background-repeat: no-repeat;
+  border: none;
+  padding: 15px;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+#closeModalButton:hover {
+  cursor: pointer;
+  transform: scale(1.2, 1.2);
+}
+
+.movieDetails {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-left {
+  width: 275px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.modal-left img {
+  width: 230px;
+  height: auto;
+  margin-bottom: 6px;
+}
+
+.modal-left-ratings-wrapper {
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.modal-left-ratings {
+  background-color: rgba(156, 119, 194, 0.9);
+  margin: 4px;
+  padding: 4px 6px;
+  border-radius: 15px;
+}
+
+.modal-left-ratings:first-child {
+  order: 1;
+}
+
+.modal-left-ratings span {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-left-ratings span:first-child::after {
+  content: ' '
+}
+
+.modal-right {
+  width: 350px;
+  height: 410px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  padding: 0 10px 10px 10px;
+}
+
+.titleDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleDiv * {
+  margin: 0;
+}
+
+.titleDiv span {
+  margin-right: 25px;
+  font-size: 26px;
+  color: #CFA9F9;
+  font-weight: 800;
+}
+
+.modal-right h2 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.movieInfo {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 800;
+  justify-content: space-evenly;
+}
+
+.info:first-child {
+  order: 1;
+}
+
+.info {
+  margin: 6px;
+  padding: 5px 7px;
+  border-radius: 15px;
+  background-color: #99B080;
+}
+
+.modal-right-bottom * {
+  margin: 0;
+}
+
+.modal-right-bottom {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.modal-right-bottom h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.modal-right-bottom p {
+  margin-left: 10px;
+  margin-bottom: 30px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+
+/***** RESPONSIVE DESIGN *****/
+
+@media screen and (max-width: 1024px) {
+  .movielist {
+    flex-wrap: wrap;
+    margin: 0 75px;
+    justify-content: center;
+}
+
+.background-img {
+  min-height: 102%;
+}
+
+.background-overlay {
+  min-height: 102%;
+}
+
+nav ul {
+  padding: 0;
+}
+
+nav ul li a {
+  margin: 5px;
+}
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .app-title {
+    font-size: 40px;
+  }
+
+  input[type="text"] {
+    width: 175px;
+  }
+
+  input[type="text"]:focus {
+    width: 225px;
+  }
+
+  .ReactModal__Content {
+    width: 700px;
+  }
+
+}
+
+@media screen and (max-width: 414px) {
+
+  .App {
+
+  }
+
+  .header {
+    flex-direction: column;
+    height: 250px;
+  }
+
+  .app-title {
+    margin: 50px auto 0 auto;
+  }
+
+  .right-header-div {
+    margin: 0 auto;
+  }
+
+  .searchbar-container {
+    margin-top: 10px;
+  }
+
+  .error-container {
+    margin: 10px auto;
+  }
+
+  .carousel {
+    box-sizing: border-box;
+    margin: 0 25px 50px 25px;
+    padding: 10px auto;
+}
+
+  .movielist {
+    margin: 0 25px;
+  }
+
+  .modalWindow {
+    width: 350px;
+    padding: 10px;
+    overflow: hidden;
+    height: auto;
+  }
+
+  .movieDetails {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-right {
+    height: auto;
+    width: auto;
+    margin: 10px auto;
+  }
+
+  .titleDiv {
+    margin-bottom: 10px;
+  }
+
+  .modal-left {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .modal-left img {
+    display: none;
+  }
+
+}
+@media screen and (max-width: 375px) {
+
+  .swiper-wrapper {
+    margin: 0 10px !important;
+  }
+}

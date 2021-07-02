@@ -1,0 +1,26 @@
+{
+  "short_name": "Reactoads Movieapp",
+  "name": "Reactoads Movieapp | Explore Movies and TV Shows",
+  "description": "A Bitwise React Apprenticeship project using React.js to generate movies and TV shows using the OMDb API.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#895FB5",
+  "background_color": "#000"
+}
